@@ -5,3 +5,5 @@ npm i -D eslint-config-standard-with-typescript eslint-plugin-import eslint-plug
 npm i -D prettier eslint-config-prettier eslint-plugin-prettier
 
 npm install -D tailwindcss
+
+npm install @heroicons/react
