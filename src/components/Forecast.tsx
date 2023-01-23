@@ -1,4 +1,3 @@
-import location from '../../public/location-svgrepo-com.svg'
 import { DataProps } from '../types'
 
 const Forecast = ({ data }: DataProps): JSX.Element => {
@@ -14,7 +13,7 @@ const Forecast = ({ data }: DataProps): JSX.Element => {
   const today = data.list[0]
 
   return (
-    <section className="flex flex-col gap-5 items-center">
+    <section className="flex flex-col items-center">
       <img
         className="w-36"
         src={`http://openweathermap.org/img/wn/${today.weather[0].icon}@2x.png`}
