@@ -1,0 +1,33 @@
+import { Info } from '../types'
+import temp from '../../public/temperature-high-svgrepo-com.svg'
+import humidity from '../../public/humidity-svgrepo-com.svg'
+import rain from '../../public/umbrella-svgrepo-com.svg'
+import wind from '../../public/wind-svgrepo-com.svg'
+
+const InfoToday = ({ forecastToday }: Info): JSX.Element => {
+  const forecast = forecastToday[0]
+  return (
+    <div className="max-w-4xl w-10/12 flex flex-row justify-around items-center p-2 shadow-[0_50px_25px_-24px_rgb(0,0,0,0.3)] rounded-md bg-violet-300 opacity-80">
+      <section className="flex flex-col items-center w-12">
+        <img className="w-8" src={temp} alt="temperature icon" />
+        <p>{Math.floor(forecast.main.feels_like)}º</p>
+      </section>
+      <section className="flex flex-col items-center w-12">
+        <img className="w-8" src={humidity} alt="humidity icon" />
+        <p>{Math.floor(forecast.main.humidity)}%</p>
+      </section>
+      <section className="flex flex-col items-center w-12">
+        <img className="w-8" src={rain} alt="rain icon" />
+        <p>{Math.floor(forecast.main.feels_like)}º</p>
+      </section>
+      <section className="flex flex-col items-center w-12">
+        <img className="w-8" src={wind} alt="wind icon" />
+        <div className="flex flex-row items-center">
+          <p>{forecast.wind.speed}</p>
+          <p className="text-sm">Km/h</p>
+        </div>
+      </section>
+    </div>
+  )
+}
+export default InfoToday
