@@ -35,7 +35,7 @@ const useWeather = () => {
       .then((data) => {
         const weatherData = {
           ...data.city,
-          list: data.list.slice(0, 24),
+          list: data.list,
         }
         setWeather(weatherData)
       })

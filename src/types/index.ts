@@ -27,6 +27,7 @@ export interface InfoProps {
 export interface Info {
   forecastToday: [
     {
+      dt_txt: string
       dt: number
       main: {
         feels_like: number
@@ -64,6 +65,7 @@ export interface WeatherType {
   sunset: number
   list: [
     {
+      dt_txt: string
       dt: number
       main: {
         feels_like: number
@@ -93,3 +95,17 @@ export interface WeatherType {
     }
   ]
 }
+
+export interface SunTime {
+  sunrise: string
+  sunset: string
+}
+
+export interface DateToday {
+  weekDay: string
+  day: string
+  month: string
+  year: string
+}
+
+export type TempDay = Record<string, number | string>

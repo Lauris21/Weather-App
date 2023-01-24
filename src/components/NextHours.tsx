@@ -3,7 +3,7 @@ import { Info } from '../types/index'
 const NextHours = ({ forecastToday }: Info): JSX.Element => {
   const nextH = forecastToday
   return (
-    <div className="flex overflow-x-scroll w-full  bg-violet-300 opacity-80 p-2 gap-1.5 rounded-md">
+    <div className="flex overflow-x-scroll w-full bg-white/20 p-2 gap-1.5 rounded-md">
       {nextH.map((item, i) => (
         <div
           className="inline-block text-center w-[50px] flex-shrink-0 sm:w-[80px] bg-white/40 rounded-md"

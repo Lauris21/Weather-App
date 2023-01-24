@@ -3,6 +3,7 @@ import location from '../../public/location-svgrepo-com.svg'
 import { useEffect } from 'react'
 import Forecast from './Forecast'
 import TodayAndMore from './TodayAndMore'
+import Date from './Date'
 
 const Main = ({
   locat,
@@ -28,7 +29,7 @@ const Main = ({
         .then((data) => {
           const weatherData = {
             ...data.city,
-            list: data.list.slice(0, 24),
+            list: data.list,
           }
           setWeather(weatherData)
         })
@@ -44,7 +45,7 @@ const Main = ({
         .then((data) => {
           const weatherData = {
             ...data.city,
-            list: data.list.slice(0, 24),
+            list: data.list,
           }
           setWeather(weatherData)
         })
@@ -96,14 +97,20 @@ const Main = ({
             </ul>
             <div className="flex flex-row gap-2">
               <img className="w-5" src={location} alt="location icon" />
-              {weather !== null && <h2>{weather.name}</h2>}
+              {weather !== null && (
+                <h2 className="text-lg">
+                  {weather.name}
+                  <span className="font-extralight">, {weather.country}</span>
+                </h2>
+              )}
             </div>
-            <p>{}</p>
           </div>
         </section>
         {weather !== null && <Forecast data={weather} />}
       </div>
-      {weather !== null && <TodayAndMore info={weather} />}
+      <div className="flex flex-col gap-8 items-center justify-center w-full">
+        {weather !== null && <TodayAndMore info={weather} />}
+      </div>
     </main>
   )
 }
