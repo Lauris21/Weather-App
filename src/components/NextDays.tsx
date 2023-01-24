@@ -59,10 +59,32 @@ const NextDays = ({ forecastToday }: Info): JSX.Element => {
       icon: mayIcon[key],
     }
   }
-  console.log(nextForecast)
+
+  const arraNextForecast = []
+  for (let day in nextForecast) {
+    if (nextForecast.hasOwnProperty(day)) {
+      arraNextForecast.push({
+        day,
+        value: nextForecast[day],
+      })
+    }
+  }
+
+  const week: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+
+  arraNextForecast.map((item) => {
+    console.log(item)
+  })
+
   return (
     <div>
-      <section></section>
+      <section>
+        {arraNextForecast.map((item, i) => (
+          <div key={i}>
+            <p>{i === 0 ? 'Today' : week[new Date(item.day).getDay()]}</p>
+          </div>
+        ))}
+      </section>
     </div>
   )
 }
