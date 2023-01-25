@@ -20,7 +20,7 @@ const Header = (): JSX.Element => {
   }
 
   return (
-    <header className="flex flex-row justify-between bg-purple-400 dark:bg-violet-600 dark:opacity-95 opacity-75 py-3 px-6 h-[8vh]">
+    <header className="flex flex-row justify-between bg-purple-400 dark:bg-violet-700 dark:bg-opacity-60 bg-opacity-50 py-3 px-6 h-[8vh]">
       <img className="w-10" src={logo} alt="logo weather" />
       <label
         htmlFor="check"
@@ -32,7 +32,7 @@ const Header = (): JSX.Element => {
         >
           <input type="checkbox" id="check" className="sr-only peer" />
           <span
-            className="border-2 w-6 h-6 bg-violet-900 absolute rounded-full peer-checked:bg-violet-200 peer-checked:left-6 peer-checked:border-0 transition-all duration-500"
+            className="border-2 w-6 h-6 bg-violet-900 absolute rounded-full peer-checked:bg-violet-200 peer-checked:left-6 peer-checked:border-0 transition-all duration-500 dark:peer-checked:left-6 dark:peer-checked:bg-violet-200 dark:peer-checked:border-0"
             onClick={changeMode}
           ></span>
         </span>

@@ -16,17 +16,19 @@ const App = (): JSX.Element => {
 
   return (
     <div className="App">
-      <Header />
-      <Main
-        locat={locat}
-        weather={weather}
-        setWeather={setWeather}
-        options={options}
-        handleInput={handleInput}
-        handleClickSearch={handleClickSearch}
-        handleClickOption={handleClickOption}
-      />
-      <Footer />
+      <div className="bg-[url('../public/bkgr.jpeg')] sm:bg-center">
+        <Header />
+        <Main
+          locat={locat}
+          weather={weather}
+          setWeather={setWeather}
+          options={options}
+          handleInput={handleInput}
+          handleClickSearch={handleClickSearch}
+          handleClickOption={handleClickOption}
+        />
+        <Footer />
+      </div>
     </div>
   )
 }

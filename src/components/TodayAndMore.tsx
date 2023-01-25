@@ -9,7 +9,7 @@ const TodayAndMore = ({ info }: InfoProps): JSX.Element => {
   const forecastToday: ForecastToday[] = info.list
   const weather: WeatherType = info
   const currentHour = hour(weather.list[0].dt_txt)
-  console.log(currentHour)
+
   const sunrise: string = getSunTime(info.sunrise)
   const sunset: string = getSunTime(info.sunset)
 
@@ -22,16 +22,17 @@ const TodayAndMore = ({ info }: InfoProps): JSX.Element => {
     Number(currentHour[1]) > formatNumber(sunset) &&
     Number(currentHour[1]) < formatNumber(sunrise)
   ) {
-    localStorage.theme = 'dark'
-  } else {
     localStorage.theme = 'light'
+  } else {
+    localStorage.theme = 'dark'
+    console.log(currentHour[1], formatNumber(sunset))
   }
   return (
     <>
       <div className="p-1.5 bg-purple-300 bg-opacity-20">
         <p className="flex flex-row gap-5 dark:text-purple-100 opacity-90 text-sm sm:text-base">
           {currentHour[0]}
-          <span>{currentHour[1]}.</span>
+          {/* <span>{currentHour[1]}.</span> */}
         </p>
       </div>
       <SunriseSunset sunset={sunset} sunrise={sunrise} />

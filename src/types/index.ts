@@ -2,15 +2,20 @@ import { ChangeEvent } from 'react'
 
 export interface OptionType {
   name: string
+  country: string
   lat: number
   lon: number
+}
+
+export interface ImportMeta {
+  readonly VITE_APP_API_KEY: string
 }
 
 export interface Props {
   locat: string
   weather: WeatherType
-  setWeather: () => void
-  options: []
+  setWeather: (weather: WeatherType) => void
+  options: Array<{ name: string }>
   handleInput: (e: ChangeEvent<HTMLInputElement>) => void
   handleClickSearch: () => void
   handleClickOption: (option: OptionType) => void

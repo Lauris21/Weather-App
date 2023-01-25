@@ -19,12 +19,12 @@ const InfoToday = ({ info }: InfoProps): JSX.Element => {
       </section>
       <section className="flex flex-col items-center w-12">
         <img className="w-8" src={rain} alt="rain icon" />
-        <p>{Math.floor(forecast.main.feels_like)}º</p>
+        <p>{Math.floor(forecast.pop)}%</p>
       </section>
       <section className="flex flex-col items-center w-12">
         <img className="w-8" src={wind} alt="wind icon" />
-        <div className="flex flex-row items-center">
-          <p>{forecast.wind.speed}</p>
+        <div className="flex flex-row items-center gap-1">
+          <p>{Math.round(forecast.wind.speed)}</p>
           <p className="text-sm">Km/h</p>
         </div>
       </section>

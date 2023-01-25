@@ -1,9 +1,8 @@
-import { Props } from '../types'
+import { Props, ImportMeta, WeatherType } from '../types'
 import location from '../../public/location-svgrepo-com.svg'
 import { useEffect } from 'react'
 import Forecast from './Forecast'
 import TodayAndMore from './TodayAndMore'
-import Date from './Date'
 
 const Main = ({
   locat,
@@ -14,6 +13,7 @@ const Main = ({
   handleClickSearch,
   handleClickOption,
 }: Props): JSX.Element => {
+  const pass: ImportMeta = import.meta.env.VITE_APP_API_KEY
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
       const { coords } = position
@@ -21,11 +21,9 @@ const Main = ({
       const lat: number = latitude
       const lon: number = longitude
       fetch(
-        `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${
-          import.meta.env.VITE_APP_API_KEY
-        }`
+        `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${pass}`
       )
-        .then((res) => res.json())
+        .then(async (res) => await res.json())
         .then((data) => {
           const weatherData = {
             ...data.city,
@@ -33,6 +31,7 @@ const Main = ({
           }
           setWeather(weatherData)
         })
+        .catch((e) => e)
     })
 
     if (weather === null) {
@@ -41,7 +40,7 @@ const Main = ({
           import.meta.env.VITE_APP_API_KEY
         }`
       )
-        .then((res) => res.json())
+        .then(async (res) => await res.json())
         .then((data) => {
           const weatherData = {
             ...data.city,
@@ -49,22 +48,23 @@ const Main = ({
           }
           setWeather(weatherData)
         })
+        .catch((e) => e)
     }
   }, [])
 
   return (
-    <main className="flex flex-col gap-5 items-center min-h-[86vh] bg-violet-400 dark:bg-violet-900 px-4 py-8">
+    <main className="flex flex-col gap-5 items-center min-h-[86vh] bg-violet-400 dark:bg-violet-900 dark:bg-opacity-70 px-4 py-8 bg-opacity-70">
       <div className="w-full flex flex-col sm:flex-row gap-8 dark:text-purple-200 sm:justify-around">
         <section className="relative flex flex-col gap-5 items-center justify-center">
           <div className="m-auto flex flex-col gap-5 items-center justify-center ">
             <div className="relative flex">
               <input
-                className="rounded-md w-40 sm:w-56 placeholder:text-violet-600 placeholder:p-2.5 placeholder:bg-violet-200 h-8"
+                className="rounded-l-md w-40 sm:w-56 placeholder:text-violet-600 placeholder:p-2 placeholder:bg-violet-200 h-8 text-violet-600 text-center"
                 placeholder="City"
                 onChange={handleInput}
               />
               <button
-                className="flex justify-center rounded-md border-2 h-8 w-10"
+                className="flex justify-center rounded-r-md border-2 h-8 w-10"
                 onClick={handleClickSearch}
               >
                 <svg
@@ -88,9 +88,11 @@ const Main = ({
                 <li key={index}>
                   <button
                     className="text-sm w-full hover:bg-violet-500 hover:text-violet-200 px-2 py-1 cursor-pointer"
-                    onClick={() => handleClickOption(option)}
+                    onClick={() => {
+                      handleClickOption(option)
+                    }}
                   >
-                    {option.name}
+                    {option.name}, {option.country}
                   </button>
                 </li>
               ))}
@@ -98,7 +100,7 @@ const Main = ({
             <div className="flex flex-row gap-2">
               <img className="w-5" src={location} alt="location icon" />
               {weather !== null && (
-                <h2 className="text-lg">
+                <h2 className="text-lg sm:text-2xl">
                   {weather.name}
                   <span className="font-extralight">, {weather.country}</span>
                 </h2>
