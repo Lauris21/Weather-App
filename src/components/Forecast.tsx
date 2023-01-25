@@ -1,5 +1,5 @@
 import { DataProps } from '../types'
-
+import { getIcon } from '../utils/getDate'
 const Forecast = ({ data }: DataProps): JSX.Element => {
   const max: number[] = data.list.map((element) => {
     return element.main.temp_max
@@ -12,13 +12,12 @@ const Forecast = ({ data }: DataProps): JSX.Element => {
   const minAverage: number = Math.min(...min)
   const today = data.list[0]
 
+  const icon = getIcon(today.weather[0].icon)
+  console.log(icon)
+
   return (
     <section className="flex flex-col items-center">
-      <img
-        className="w-36"
-        src={`http://openweathermap.org/img/wn/${today.weather[0].icon}@2x.png`}
-        alt="location icon"
-      />
+      <img className="w-36" src={icon} alt="location icon" />
       <div className="flex flex-col gap-3 items-center">
         <h2 className="w-full text-center text-lg">
           {Math.round(today.main.temp)}º

@@ -53,7 +53,7 @@ const Main = ({
   }, [])
 
   return (
-    <main className="flex flex-col gap-5 items-center min-h-[92vh] bg-violet-400 dark:bg-violet-900 px-4 py-8">
+    <main className="flex flex-col gap-5 items-center min-h-[86vh] bg-violet-400 dark:bg-violet-900 px-4 py-8">
       <div className="w-full flex flex-col sm:flex-row gap-8 dark:text-purple-200 sm:justify-around">
         <section className="relative flex flex-col gap-5 items-center justify-center">
           <div className="m-auto flex flex-col gap-5 items-center justify-center ">

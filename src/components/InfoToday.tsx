@@ -8,7 +8,7 @@ const InfoToday = ({ info }: InfoProps): JSX.Element => {
   const forecast = info.list[0]
 
   return (
-    <div className="max-w-4xl w-10/12 flex flex-row justify-around items-center p-2 shadow-[0_50px_25px_-24px_rgb(0,0,0,0.3)] rounded-md bg-violet-300 opacity-80">
+    <div className="max-w-screen-lg w-10/12 flex flex-row justify-around items-center p-2 shadow-[0_50px_25px_-24px_rgb(0,0,0,0.5)] rounded-md bg-violet-300 opacity-80">
       <section className="flex flex-col items-center w-12">
         <img className="w-8" src={temp} alt="temperature icon" />
         <p>{Math.floor(forecast.main.feels_like)}º</p>

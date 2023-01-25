@@ -1,5 +1,5 @@
 import { Info, TempDay } from '../types/index'
-import { formatDate, average } from '../utils/getDate'
+import { formatDate, average, getIcon } from '../utils/getDate'
 
 const NextDays = ({ forecastToday }: Info): JSX.Element => {
   const days = forecastToday
@@ -52,7 +52,7 @@ const NextDays = ({ forecastToday }: Info): JSX.Element => {
   }
 
   const arraNextForecast = []
-  for (let day in nextForecast) {
+  for (const day in nextForecast) {
     if (nextForecast.hasOwnProperty(day)) {
       arraNextForecast.push({
         day,
@@ -60,37 +60,46 @@ const NextDays = ({ forecastToday }: Info): JSX.Element => {
       })
     }
   }
-  console.log(arraNextForecast)
 
   const week: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
   return (
-    <div>
-      <section>
-        {arraNextForecast.map((item, i) => (
-          <div key={i}>
-            <div>
-              <p>{i === 0 ? 'Today' : week[new Date(item.day).getDay()]}</p>
-              <p>{formatDate(item.day)}</p>
-            </div>
-            <div>
-              <img
-                src={`http://openweathermap.org/img/wn/${item.value.icon}@2x.png`}
-                alt={`weather-icon-${item.value.weather}`}
-              />
-              <p>{item.value.weather.toUpperCase()}</p>
-            </div>
-            <div>
-              <p>
-                Max: <span>{item.value.max}º</span>
-              </p>
-              <p>
-                Min: <span>{item.value.min}º</span>
-              </p>
-            </div>
+    <div className="flex flex-col w-full bg-white/10 opacity-85 p-4 gap-4 rounded-md max-w-screen-2xl">
+      {arraNextForecast.map((item, i) => (
+        <div
+          key={i}
+          className="flex flex-row justify-between items-center rounded-md bg-violet-300 px-3 py-2 shadow-[0_50px_25px_-24px_rgb(0,0,50,0.3)] md:justify-around dark:opacity-70"
+        >
+          <div className="flex flex-col gap-4 md:flex-row">
+            <p className="text-center ">
+              {i === 0 ? 'Today' : week[new Date(item.day).getDay()]}
+            </p>
+            <p className="text-center ">{formatDate(item.day)}</p>
           </div>
-        ))}
-      </section>
+          <div className="flex flex-col items-center md:flex-row md:w-[19rem] ">
+            <img
+              className="max-w-[7rem]"
+              src={
+                item.value.weather == 'clear sky'
+                  ? getIcon('01d')
+                  : getIcon(item.value.icon)
+              }
+              alt={`weather-icon-${item.value.weather}`}
+            />
+            <p className="text-center text-sm place-self-center w-full">
+              {item.value.weather.toUpperCase()}
+            </p>
+          </div>
+          <div className="flex flex-col gap-4">
+            <p className="text-center ">
+              Max: <span>{item.value.max}º</span>
+            </p>
+            <p className="text-center ">
+              Min: <span>{item.value.min}º</span>
+            </p>
+          </div>
+        </div>
+      ))}
     </div>
   )
 }

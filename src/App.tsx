@@ -1,6 +1,7 @@
 import Header from './components/Header'
 import Main from './components/Main'
 import useWeather from './hooks/useWeather'
+import Footer from './components/Footer'
 
 const App = (): JSX.Element => {
   const {
@@ -25,6 +26,7 @@ const App = (): JSX.Element => {
         handleClickSearch={handleClickSearch}
         handleClickOption={handleClickOption}
       />
+      <Footer />
     </div>
   )
 }
