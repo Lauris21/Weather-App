@@ -1,8 +1,9 @@
-import { DateToday } from '../types'
+import { count } from 'console'
+import { DateToday, TempDay } from '../types'
 
-const getDate = (date: number): DateToday => {
-  const myDate = new Date(date * 1000)
-  const array = myDate.toString().split(' ')
+export const getDate = (date: number): DateToday => {
+  const myDate: Date = new Date(date * 1000)
+  const array: string[] = myDate.toString().split(' ')
   return {
     weekDay: array[0],
     day: array[2],
@@ -10,4 +11,36 @@ const getDate = (date: number): DateToday => {
     year: array[3],
   }
 }
-export default getDate
+
+export const formatDate = (date: string): string => {
+  const dateArray = date.split('-')
+  const months = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sept',
+    'Oct',
+    'Nov',
+    'Dec',
+  ]
+  return `${dateArray[2]} ${months[dateArray[1] - 1]}`
+}
+
+export const average = (list: TempDay) => {
+  const averageTotal: Record<string, string> = {}
+  for (const key in list) {
+    const counts = list[key].reduce((counts, string) => {
+      counts[string] = (counts[string] || 0) + 1
+      return counts
+    }, {})
+    averageTotal[key] = Object.keys(counts).reduce((a, b) =>
+      counts[a] > counts[b] ? a : b
+    )
+  }
+  return averageTotal
+}

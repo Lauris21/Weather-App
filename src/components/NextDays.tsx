@@ -1,4 +1,5 @@
 import { Info, TempDay } from '../types/index'
+import { formatDate, average } from '../utils/getDate'
 
 const NextDays = ({ forecastToday }: Info): JSX.Element => {
   const days = forecastToday
@@ -6,6 +7,8 @@ const NextDays = ({ forecastToday }: Info): JSX.Element => {
   const avgMax: TempDay = {}
   const avgMin: TempDay = {}
   const dailyIcon: TempDay = {}
+  const dailyweather: TempDay = {}
+
   days.map((item) => {
     const date = new Date(item.dt_txt)
     const day = date.toISOString().slice(0, 10)
@@ -25,31 +28,18 @@ const NextDays = ({ forecastToday }: Info): JSX.Element => {
   days.map((item) => {
     const date = new Date(item.dt_txt)
     const day = date.toISOString().slice(0, 10)
-    const icon = item.weather[0].icon
-
+    const iconAndWeather = item.weather[0]
     if (!dailyIcon[day]) {
-      dailyIcon[day] = {}
+      dailyIcon[day] = []
     }
-    if (!dailyIcon[day][icon]) {
-      dailyIcon[day][icon] = 1
-    } else {
-      dailyIcon[day][icon]++
+    dailyIcon[day].push(iconAndWeather.icon)
+    if (!dailyweather[day]) {
+      dailyweather[day] = []
     }
+    dailyweather[day].push(iconAndWeather.description)
   })
-
-  const mayIcon: TempDay = {}
-
-  Object.keys(dailyIcon).forEach((day) => {
-    let maxIcon = ''
-    let maxCount = 0
-    Object.keys(dailyIcon[day]).forEach((icon) => {
-      if (dailyIcon[day][icon] > maxCount) {
-        maxIcon = icon
-        maxCount = dailyIcon[day][icon]
-      }
-    })
-    mayIcon[day] = maxIcon
-  })
+  const mayIcon: TempDay = average(dailyIcon)
+  const mayDescription: TempDay = average(dailyweather)
 
   const nextForecast: TempDay = {}
   for (const key of Object.keys(avgMax)) {
@@ -57,6 +47,7 @@ const NextDays = ({ forecastToday }: Info): JSX.Element => {
       max: avgMax[key],
       min: avgMin[key],
       icon: mayIcon[key],
+      weather: mayDescription[key],
     }
   }
 
@@ -69,19 +60,34 @@ const NextDays = ({ forecastToday }: Info): JSX.Element => {
       })
     }
   }
+  console.log(arraNextForecast)
 
   const week: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-
-  arraNextForecast.map((item) => {
-    console.log(item)
-  })
 
   return (
     <div>
       <section>
         {arraNextForecast.map((item, i) => (
           <div key={i}>
-            <p>{i === 0 ? 'Today' : week[new Date(item.day).getDay()]}</p>
+            <div>
+              <p>{i === 0 ? 'Today' : week[new Date(item.day).getDay()]}</p>
+              <p>{formatDate(item.day)}</p>
+            </div>
+            <div>
+              <img
+                src={`http://openweathermap.org/img/wn/${item.value.icon}@2x.png`}
+                alt={`weather-icon-${item.value.weather}`}
+              />
+              <p>{item.value.weather.toUpperCase()}</p>
+            </div>
+            <div>
+              <p>
+                Max: <span>{item.value.max}º</span>
+              </p>
+              <p>
+                Min: <span>{item.value.min}º</span>
+              </p>
+            </div>
           </div>
         ))}
       </section>
