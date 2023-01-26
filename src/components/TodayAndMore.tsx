@@ -1,17 +1,17 @@
-import { ForecastToday, InfoProps, WeatherType } from '../types'
+import { ForecastToday, InfoProps, WeatherType, ImportMeta } from '../types'
 import InfoToday from './InfoToday'
 import NextHours from './NextHours'
 import SunriseSunset from './SunriseSunset'
 import NextDays from './NextDays'
-import { hour, getSunTime } from '../utils/getDate'
+import { getSunTime, hour } from '../utils/getDate'
 
 const TodayAndMore = ({ info }: InfoProps): JSX.Element => {
   const forecastToday: ForecastToday[] = info.list
   const weather: WeatherType = info
   const currentHour = hour(weather.list[0].dt_txt)
-
   const sunrise: string = getSunTime(info.sunrise)
   const sunset: string = getSunTime(info.sunset)
+  console.log(weather.timezone)
 
   const formatNumber = (string: string): number => {
     const splitTime: string[] = string.split(':')
@@ -25,8 +25,8 @@ const TodayAndMore = ({ info }: InfoProps): JSX.Element => {
     localStorage.theme = 'light'
   } else {
     localStorage.theme = 'dark'
-    console.log(currentHour[1], formatNumber(sunset))
   }
+
   return (
     <>
       <div className="p-1.5 bg-purple-300 bg-opacity-20">

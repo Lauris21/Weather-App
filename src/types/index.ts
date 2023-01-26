@@ -15,7 +15,7 @@ export interface Props {
   locat: string
   weather: WeatherType
   setWeather: (weather: WeatherType) => void
-  options: Array<{ name: string }>
+  options: []
   handleInput: (e: ChangeEvent<HTMLInputElement>) => void
   handleClickSearch: () => void
   handleClickOption: (option: OptionType) => void
@@ -94,6 +94,7 @@ export interface ForecastToday {
 }
 
 export interface WeatherType {
+  coord: any
   name: string
   country: string
   sunrise: number

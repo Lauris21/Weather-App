@@ -1,4 +1,4 @@
-import { Props, ImportMeta, WeatherType } from '../types'
+import { Props, ImportMeta } from '../types'
 import location from '../../public/location-svgrepo-com.svg'
 import { useEffect } from 'react'
 import Forecast from './Forecast'
@@ -36,9 +36,7 @@ const Main = ({
 
     if (weather === null) {
       fetch(
-        `https://api.openweathermap.org/data/2.5/forecast?lat=33.770050&lon=-118.193741&units=metric&appid=${
-          import.meta.env.VITE_APP_API_KEY
-        }`
+        `https://api.openweathermap.org/data/2.5/forecast?lat=33.770050&lon=-118.193741&units=metric&appid=${pass}`
       )
         .then(async (res) => await res.json())
         .then((data) => {
@@ -84,7 +82,7 @@ const Main = ({
               </button>
             </div>
             <ul className="absolute top-8 bg-blue-500 rounded-md sm:top-20">
-              {options.map((option: { name: string }, index: number) => (
+              {options.map((option, index: number) => (
                 <li key={index}>
                   <button
                     className="text-sm w-full hover:bg-violet-500 hover:text-violet-200 px-2 py-1 cursor-pointer"

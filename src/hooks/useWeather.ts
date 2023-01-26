@@ -7,14 +7,14 @@ const useWeather = () => {
   const [city, setCity] = useState<OptionType | null>(null)
   const [weather, setWeather] = useState<WeatherType | null>(null)
 
-  const getOptions = (value: string) => {
+  const pass: ImportMeta = import.meta.env.VITE_APP_API_KEY
+  const getOptions = (value: string): void => {
     fetch(
-      `http://api.openweathermap.org/geo/1.0/direct?q=${value.trim()}&limit=5&appid=${
-        import.meta.env.VITE_APP_API_KEY
-      }`
+      `http://api.openweathermap.org/geo/1.0/direct?q=${value.trim()}&limit=5&appid=${pass}`
     )
-      .then((res) => res.json())
+      .then(async (res) => await res.json())
       .then((data) => setOptions(data))
+      .catch((e) => e)
   }
   const handleInput = (
     e: ChangeEvent<HTMLInputElement>
@@ -25,13 +25,11 @@ const useWeather = () => {
     getOptions(value)
   }
 
-  const getWeather = (city: OptionType) => {
+  const getWeather = (city: OptionType): void => {
     fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?lat=${city.lat}&lon=${
-        city.lon
-      }&units=metric&appid=${import.meta.env.VITE_APP_API_KEY}`
+      `https://api.openweathermap.org/data/2.5/forecast?lat=${city.lat}&lon=${city.lon}&units=metric&appid=${pass}`
     )
-      .then((res) => res.json())
+      .then(async (res) => await res.json())
       .then((data) => {
         const weatherData = {
           ...data.city,
@@ -39,13 +37,14 @@ const useWeather = () => {
         }
         setWeather(weatherData)
       })
+      .catch((e) => e)
   }
 
-  const handleClickSearch = () => {
+  const handleClickSearch = (): void => {
     if (!city) return
     getWeather(city)
   }
-  const handleClickOption = (option: OptionType) => {
+  const handleClickOption = (option: OptionType): void => {
     setCity(option)
   }
   useEffect(() => {

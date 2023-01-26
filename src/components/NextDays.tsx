@@ -1,4 +1,4 @@
-import { Info, TempDay } from '../types/index'
+import { Info, TempDay, ForecastToday } from '../types/index'
 import { formatDate, average, getIcon } from '../utils/getDate'
 
 const NextDays = ({ forecastToday }: Info): JSX.Element => {
@@ -9,7 +9,7 @@ const NextDays = ({ forecastToday }: Info): JSX.Element => {
   const dailyIcon: TempDay = {}
   const dailyweather: TempDay = {}
 
-  days.map((item) => {
+  days.map((item: ForecastToday): void => {
     const date = new Date(item.dt_txt)
     const day = date.toISOString().slice(0, 10)
     if (!avgMax[day]) {
@@ -25,7 +25,7 @@ const NextDays = ({ forecastToday }: Info): JSX.Element => {
     }
   })
 
-  days.map((item) => {
+  days.map((item: ForecastToday): void => {
     const date = new Date(item.dt_txt)
     const day = date.toISOString().slice(0, 10)
     const iconAndWeather = item.weather[0]
