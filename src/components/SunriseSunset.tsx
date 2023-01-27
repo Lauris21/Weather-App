@@ -3,6 +3,7 @@ import sunriseIcon from '../../public/sunrise-svgrepo-com.svg'
 import sunsetIcon from '../../public/sunset-svgrepo-com.svg'
 
 const SunriseSunset = ({ sunset, sunrise }: SunTime): JSX.Element => {
+  console.log('Holi')
   return (
     <div className="flex flex-row gap-3">
       <section className="w-28 sm:w-56 flex flex-col items-center justify-center bg-white/20 backdrop-blur-lg rounded drop-shadow-lg px-4 py-3 pag-1">

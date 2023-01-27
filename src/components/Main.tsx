@@ -6,14 +6,15 @@ import TodayAndMore from './TodayAndMore'
 
 const Main = ({
   locat,
+  options,
   weather,
   setWeather,
-  options,
-  handleInput,
   handleClickSearch,
+  handleInput,
   handleClickOption,
 }: Props): JSX.Element => {
   const pass: ImportMeta = import.meta.env.VITE_APP_API_KEY
+
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
       const { coords } = position

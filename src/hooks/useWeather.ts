@@ -21,7 +21,9 @@ const useWeather = () => {
   ): OptionType[] | undefined => {
     const value = e.target.value.trim()
     setLocat(value)
-    if (value === '') return
+    if (value === '') {
+      return
+    }
     getOptions(value)
   }
 

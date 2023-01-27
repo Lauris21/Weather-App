@@ -9,6 +9,7 @@ export interface OptionType {
 
 export interface ImportMeta {
   readonly VITE_APP_API_KEY: string
+  readonly VITE_APP_API_KEY_TIME: string
 }
 
 export interface Props {

@@ -1,4 +1,4 @@
-import { ForecastToday, InfoProps, WeatherType, ImportMeta } from '../types'
+import { ForecastToday, InfoProps, WeatherType } from '../types'
 import InfoToday from './InfoToday'
 import NextHours from './NextHours'
 import SunriseSunset from './SunriseSunset'
@@ -11,7 +11,6 @@ const TodayAndMore = ({ info }: InfoProps): JSX.Element => {
   const currentHour = hour(weather.list[0].dt_txt)
   const sunrise: string = getSunTime(info.sunrise)
   const sunset: string = getSunTime(info.sunset)
-  console.log(weather.timezone)
 
   const formatNumber = (string: string): number => {
     const splitTime: string[] = string.split(':')
@@ -32,7 +31,6 @@ const TodayAndMore = ({ info }: InfoProps): JSX.Element => {
       <div className="p-1.5 bg-purple-300 bg-opacity-20">
         <p className="flex flex-row gap-5 dark:text-purple-100 opacity-90 text-sm sm:text-base">
           {currentHour[0]}
-          {/* <span>{currentHour[1]}.</span> */}
         </p>
       </div>
       <SunriseSunset sunset={sunset} sunrise={sunrise} />
