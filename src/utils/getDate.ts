@@ -28,7 +28,7 @@ export const getDate = (date: number): DateToday => {
 }
 
 export const formatDate = (date: string): string => {
-  const dateArray = date.split('-')
+  const dateArray: any = date.split('-')
   const months = [
     'Jan',
     'Feb',
