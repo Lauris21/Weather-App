@@ -13,9 +13,8 @@ const Main = ({
   handleInput,
   handleClickOption,
 }: Props): JSX.Element => {
-  const pass: ImportMeta = import.meta.env.VITE_APP_API_KEY
-
   useEffect(() => {
+    const pass: ImportMeta = import.meta.env.VITE_APP_API_KEY
     navigator.geolocation.getCurrentPosition((position) => {
       const { coords } = position
       const { latitude, longitude } = coords

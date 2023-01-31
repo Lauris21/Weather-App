@@ -1,7 +1,15 @@
 import { useEffect, useState, ChangeEvent } from 'react'
 import { OptionType, WeatherType } from '../types'
 
-const useWeather = () => {
+const useWeather = (): {
+  locat: string
+  options: never[]
+  weather: WeatherType | null
+  setWeather: React.Dispatch<React.SetStateAction<WeatherType | null>>
+  handleInput: (e: ChangeEvent<HTMLInputElement>) => OptionType[] | undefined
+  handleClickSearch: () => void
+  handleClickOption: (option: OptionType) => void
+} => {
   const [locat, setLocat] = useState<string>('')
   const [options, setOptions] = useState([])
   const [city, setCity] = useState<OptionType | null>(null)

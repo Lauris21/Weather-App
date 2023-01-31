@@ -3,7 +3,7 @@ import { getIcon } from '../utils/getDate'
 
 const NextHours = ({ forecastToday }: Info): JSX.Element => {
   const nextH = forecastToday
-
+  console.log(nextH)
   return (
     <div className="flex overflow-x-scroll w-full bg-purple-300 bg-opacity-20 p-2 gap-1.5 rounded-md max-w-screen-2xl shadow-[0_50px_25px_-24px_rgb(0,0,0,0.3)]">
       {nextH.map((item, i) => (

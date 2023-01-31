@@ -4,6 +4,7 @@ import NextHours from './NextHours'
 import SunriseSunset from './SunriseSunset'
 import NextDays from './NextDays'
 import { getSunTime, hour } from '../utils/getDate'
+import { useEffect } from 'react'
 
 const TodayAndMore = ({ info }: InfoProps): JSX.Element => {
   const forecastToday: ForecastToday[] = info.list
@@ -17,15 +18,20 @@ const TodayAndMore = ({ info }: InfoProps): JSX.Element => {
     const newFormat: string = `${splitTime[0]}.${splitTime[1]}`
     return Number(newFormat)
   }
-  if (
-    Number(currentHour[1]) > formatNumber(sunset) &&
-    Number(currentHour[1]) < formatNumber(sunrise)
-  ) {
-    localStorage.theme = 'light'
-  } else {
-    localStorage.theme = 'dark'
-  }
-
+  console.log('hora actual', currentHour[1])
+  console.log('atardecer', sunset, 'amanecer', sunrise)
+  useEffect(() => {
+    if (
+      Number(currentHour[1]) > formatNumber(sunrise) &&
+      Number(currentHour[1]) < formatNumber(sunset)
+    ) {
+      console.log('atardecer', sunset, 'amanecer', sunrise)
+      localStorage.theme = 'light'
+    } else {
+      console.log('hora actual', currentHour[1])
+      localStorage.theme = 'dark'
+    }
+  }, [weather])
   return (
     <>
       <div className="p-1.5 bg-purple-300 bg-opacity-20">

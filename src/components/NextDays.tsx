@@ -1,15 +1,18 @@
-import { Info, TempDay, ForecastToday } from '../types/index'
+import { TempDay, ForecastToday, arrTempDay } from '../types/index'
 import { formatDate, average, getIcon } from '../utils/getDate'
 
-const NextDays = ({ forecastToday }: Info): JSX.Element => {
-  const days = forecastToday
+interface Prp {
+  forecastToday: ForecastToday[]
+}
+const NextDays = ({ forecastToday }: Prp): JSX.Element => {
+  const days: ForecastToday[] = forecastToday
 
   const avgMax: TempDay = {}
   const avgMin: TempDay = {}
-  const dailyIcon: TempDay = {}
-  const dailyweather: TempDay = {}
+  const dailyIcon: arrTempDay = {}
+  const dailyweather: arrTempDay = {}
 
-  days.map((item: ForecastToday): void => {
+  days.forEach((item: ForecastToday): void => {
     const date = new Date(item.dt_txt)
     const day = date.toISOString().slice(0, 10)
     if (!avgMax[day]) {
@@ -25,7 +28,7 @@ const NextDays = ({ forecastToday }: Info): JSX.Element => {
     }
   })
 
-  days.map((item: ForecastToday): void => {
+  days.forEach((item: ForecastToday): void => {
     const date = new Date(item.dt_txt)
     const day = date.toISOString().slice(0, 10)
     const iconAndWeather = item.weather[0]
@@ -54,6 +57,8 @@ const NextDays = ({ forecastToday }: Info): JSX.Element => {
   const arraNextForecast = []
   for (const day in nextForecast) {
     if (nextForecast.hasOwnProperty(day)) {
+      console.log('HOK')
+
       arraNextForecast.push({
         day,
         value: nextForecast[day],
@@ -64,11 +69,11 @@ const NextDays = ({ forecastToday }: Info): JSX.Element => {
   const week: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
   return (
-    <div className="flex flex-col w-full bg-white/10 opacity-85 p-4 gap-4 rounded-md max-w-screen-2xl">
+    <div className="flex flex-col w-full bg-white/10 bg-opacity-85 p-4 gap-4 rounded-md max-w-screen-2xl">
       {arraNextForecast.map((item, i) => (
         <div
           key={i}
-          className="flex flex-row justify-between items-center rounded-md bg-violet-300 px-3 py-2 shadow-[0_50px_25px_-24px_rgb(0,0,50,0.3)] md:justify-around dark:opacity-70"
+          className="flex flex-row justify-between items-center rounded-md bg-violet-300 px-3 py-2 shadow-[0_50px_25px_-24px_rgb(0,0,50,0.3)] md:justify-around dark:bg-opacity-70"
         >
           <div className="flex flex-col gap-4 md:flex-row">
             <p className="text-center ">
