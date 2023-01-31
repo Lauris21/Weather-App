@@ -82,7 +82,7 @@ const Main = ({
               </button>
             </div>
             <ul className="absolute top-8 bg-blue-500 rounded-md sm:top-20">
-              {options.map((option, index: number) => (
+              {options.map((option: any, index: number) => (
                 <li key={index}>
                   <button
                     className="text-sm w-full hover:bg-violet-500 hover:text-violet-200 px-2 py-1 cursor-pointer"

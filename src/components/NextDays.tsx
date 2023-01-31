@@ -1,4 +1,4 @@
-import { TempDay, ForecastToday, arrTempDay } from '../types/index'
+import { TempDay, ForecastToday, arrTempDay, IconWeather } from '../types/index'
 import { formatDate, average, getIcon } from '../utils/getDate'
 
 interface Prp {
@@ -7,7 +7,7 @@ interface Prp {
 const NextDays = ({ forecastToday }: Prp): JSX.Element => {
   const days: ForecastToday[] = forecastToday
 
-  const avgMax: TempDay = {}
+  const avgMax: Record<string, unknown> = {}
   const avgMin: TempDay = {}
   const dailyIcon: arrTempDay = {}
   const dailyweather: arrTempDay = {}
@@ -31,7 +31,7 @@ const NextDays = ({ forecastToday }: Prp): JSX.Element => {
   days.forEach((item: ForecastToday): void => {
     const date = new Date(item.dt_txt)
     const day = date.toISOString().slice(0, 10)
-    const iconAndWeather = item.weather[0]
+    const iconAndWeather: IconWeather = item.weather[0]
     if (!dailyIcon[day]) {
       dailyIcon[day] = []
     }
