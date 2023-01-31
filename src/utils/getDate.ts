@@ -46,10 +46,10 @@ export const formatDate = (date: string): string => {
   return `${dateArray[2]} ${months[dateArray[1] - 1]}`
 }
 
-export const average = (list: TempDay): Record<string, string> => {
+export const average = (list: any): Record<string, string> => {
   const averageTotal: Record<string, string> = {}
   for (const key in list) {
-    const counts = list[key].reduce((counts, string) => {
+    const counts = list[key].reduce((counts: any, string: any) => {
       counts[string] = (counts[string] || 0) + 1
       return counts
     }, {})

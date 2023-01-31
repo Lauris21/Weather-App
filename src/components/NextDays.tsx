@@ -31,7 +31,7 @@ const NextDays = ({ forecastToday }: Prp): JSX.Element => {
   days.forEach((item: ForecastToday): void => {
     const date = new Date(item.dt_txt)
     const day = date.toISOString().slice(0, 10)
-    const iconAndWeather: IconWeather = item.weather[0]
+    const iconAndWeather: IconWeather | never = item.weather[0]
     console.log(iconAndWeather)
     if (!dailyIcon[day]) {
       dailyIcon[day] = []

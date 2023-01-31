@@ -3,8 +3,8 @@ import { OptionType, WeatherType } from '../types'
 
 const useWeather = (): {
   locat: string
-  options: []
-  weather: WeatherType
+  options: [] | any
+  weather: WeatherType | any
   setWeather: React.Dispatch<React.SetStateAction<WeatherType | null>>
   handleInput: (e: ChangeEvent<HTMLInputElement>) => OptionType[] | undefined
   handleClickSearch: () => void
