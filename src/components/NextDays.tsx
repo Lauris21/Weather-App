@@ -14,7 +14,7 @@ interface Prp {
 const NextDays = ({ forecastToday }: Prp): JSX.Element => {
   const days: ForecastToday[] = forecastToday
 
-  const avgMax: weatherMax | Record<string, string | number> = {}
+  const avgMax: weatherMax | any = {}
   const avgMin: TempDay = {}
   const dailyIcon: arrTempDay = {}
   const dailyweather: arrTempDay = {}
@@ -38,7 +38,7 @@ const NextDays = ({ forecastToday }: Prp): JSX.Element => {
   days.forEach((item: ForecastToday): void => {
     const date = new Date(item.dt_txt)
     const day = date.toISOString().slice(0, 10)
-    const iconAndWeather: IconWeather | otherIconWeather = item.weather[0]
+    const iconAndWeather: IconWeather | never = item.weather[0]
     console.log(iconAndWeather)
     if (!dailyIcon[day]) {
       dailyIcon[day] = []

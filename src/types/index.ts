@@ -162,7 +162,7 @@ export interface otherIconWeather {
 }
 
 export interface weatherMax {
-  max: string | number | number[] | string[]
+  max: string | number
   min: string | number | number[] | string[]
   icon: string | number | number[] | string[]
   weather: string | number | number[] | string[]
