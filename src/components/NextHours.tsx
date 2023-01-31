@@ -1,7 +1,11 @@
-import { Info } from '../types/index'
+import { ForecastToday } from '../types/index'
 import { getIcon } from '../utils/getDate'
 
-const NextHours = ({ forecastToday }: Info): JSX.Element => {
+interface Prp {
+  forecastToday: ForecastToday[]
+}
+
+const NextHours = ({ forecastToday }: Prp): JSX.Element => {
   const nextH = forecastToday
   console.log(nextH)
   return (

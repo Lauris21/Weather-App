@@ -7,7 +7,7 @@ interface Prp {
 const NextDays = ({ forecastToday }: Prp): JSX.Element => {
   const days: ForecastToday[] = forecastToday
 
-  const avgMax: Record<string, unknown> = {}
+  const avgMax: TempDay = {}
   const avgMin: TempDay = {}
   const dailyIcon: arrTempDay = {}
   const dailyweather: arrTempDay = {}
@@ -32,6 +32,7 @@ const NextDays = ({ forecastToday }: Prp): JSX.Element => {
     const date = new Date(item.dt_txt)
     const day = date.toISOString().slice(0, 10)
     const iconAndWeather: IconWeather = item.weather[0]
+    console.log(iconAndWeather)
     if (!dailyIcon[day]) {
       dailyIcon[day] = []
     }
@@ -41,6 +42,7 @@ const NextDays = ({ forecastToday }: Prp): JSX.Element => {
     }
     dailyweather[day].push(iconAndWeather.description)
   })
+
   const mayIcon: TempDay = average(dailyIcon)
   const mayDescription: TempDay = average(dailyweather)
 
