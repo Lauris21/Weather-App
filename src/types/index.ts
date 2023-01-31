@@ -150,9 +150,15 @@ export type TempDay = Record<string, number | string | number[] | string[]>
 export type arrTempDay = Record<string, number[] | string[]>
 
 export interface IconWeather {
+  main: never
+  icon: never
+  description: never
+}
+
+export interface otherIconWeather {
   main: string
-  icon: never | string
-  description: never | string
+  icon: string
+  description: string
 }
 
 export interface weatherMax {

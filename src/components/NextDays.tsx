@@ -1,4 +1,11 @@
-import { TempDay, ForecastToday, arrTempDay, IconWeather } from '../types/index'
+import {
+  TempDay,
+  ForecastToday,
+  arrTempDay,
+  IconWeather,
+  otherIconWeather,
+  weatherMax,
+} from '../types/index'
 import { formatDate, average, getIcon } from '../utils/getDate'
 
 interface Prp {
@@ -7,7 +14,7 @@ interface Prp {
 const NextDays = ({ forecastToday }: Prp): JSX.Element => {
   const days: ForecastToday[] = forecastToday
 
-  const avgMax: TempDay = {}
+  const avgMax: weatherMax | Record<string, string | number> = {}
   const avgMin: TempDay = {}
   const dailyIcon: arrTempDay = {}
   const dailyweather: arrTempDay = {}
@@ -31,7 +38,7 @@ const NextDays = ({ forecastToday }: Prp): JSX.Element => {
   days.forEach((item: ForecastToday): void => {
     const date = new Date(item.dt_txt)
     const day = date.toISOString().slice(0, 10)
-    const iconAndWeather: IconWeather | never = item.weather[0]
+    const iconAndWeather: IconWeather | otherIconWeather = item.weather[0]
     console.log(iconAndWeather)
     if (!dailyIcon[day]) {
       dailyIcon[day] = []
@@ -72,7 +79,7 @@ const NextDays = ({ forecastToday }: Prp): JSX.Element => {
 
   return (
     <div className="flex flex-col w-full bg-white/10 bg-opacity-85 p-4 gap-4 rounded-md max-w-screen-2xl">
-      {arraNextForecast.map((item, i) => (
+      {arraNextForecast.map((item: any, i) => (
         <div
           key={i}
           className="flex flex-row justify-between items-center rounded-md bg-violet-300 px-3 py-2 shadow-[0_50px_25px_-24px_rgb(0,0,50,0.3)] md:justify-around dark:bg-opacity-70"
