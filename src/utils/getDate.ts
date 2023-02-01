@@ -10,11 +10,11 @@ import drizzleNight from '../../public/partly-cloudy-night-drizzle.svg'
 import rainDay from '../../public/partly-cloudy-day-rain.svg'
 import rainNight from '../../public/partly-cloudy-night-rain.svg'
 import thunderstomsDay from '../../public/thunderstorms-day.svg'
-import thunderstomsNight from '../../public/thunderstorms-Night.svg'
+import thunderstomsNight from '../../public/thunderstorms-night.svg'
 import snowDay from '../../public/partly-cloudy-day-snow.svg'
 import snowNight from '../../public/partly-cloudy-night-snow.svg'
 import wind from '../../public/dust-wind.svg'
-import { DateToday, TempDay } from '../types'
+import { DateToday } from '../types'
 
 export const getDate = (date: number): DateToday => {
   const myDate: Date = new Date(date * 1000)
