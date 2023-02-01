@@ -3,7 +3,6 @@ import {
   ForecastToday,
   arrTempDay,
   IconWeather,
-  otherIconWeather,
   weatherMax,
 } from '../types/index'
 import { formatDate, average, getIcon } from '../utils/getDate'
@@ -14,7 +13,7 @@ interface Prp {
 const NextDays = ({ forecastToday }: Prp): JSX.Element => {
   const days: ForecastToday[] = forecastToday
 
-  const avgMax: weatherMax | any = {}
+  const avgMax: TempDay = {}
   const avgMin: TempDay = {}
   const dailyIcon: arrTempDay = {}
   const dailyweather: arrTempDay = {}
@@ -53,7 +52,7 @@ const NextDays = ({ forecastToday }: Prp): JSX.Element => {
   const mayIcon: TempDay = average(dailyIcon)
   const mayDescription: TempDay = average(dailyweather)
 
-  const nextForecast: TempDay = {}
+  const nextForecast: weatherMax | any = {}
   for (const key of Object.keys(avgMax)) {
     nextForecast[key] = {
       max: avgMax[key],
