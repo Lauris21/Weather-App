@@ -69,7 +69,7 @@ const NextDays = ({ forecastToday }: Prp): JSX.Element => {
   const week: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
   return (
-    <div className="flex flex-col w-full bg-white/10 bg-opacity-85 p-4 gap-4 rounded-md max-w-screen-2xl">
+    <div className="flex flex-col w-full bg-white/10 bg-opacity-50 p-4 gap-4 rounded-md max-w-screen-2xl">
       {arraNextForecast.map((item: any, i) => (
         <div
           key={i}
