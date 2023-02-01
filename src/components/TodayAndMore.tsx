@@ -18,17 +18,14 @@ const TodayAndMore = ({ info }: InfoProps): JSX.Element => {
     const newFormat: string = `${splitTime[0]}.${splitTime[1]}`
     return Number(newFormat)
   }
-  console.log('hora actual', currentHour[1])
-  console.log('atardecer', sunset, 'amanecer', sunrise)
+
   useEffect(() => {
     if (
       Number(currentHour[1]) > formatNumber(sunrise) &&
       Number(currentHour[1]) < formatNumber(sunset)
     ) {
-      console.log('atardecer', sunset, 'amanecer', sunrise)
       localStorage.theme = 'light'
     } else {
-      console.log('hora actual', currentHour[1])
       localStorage.theme = 'dark'
     }
   }, [weather])
