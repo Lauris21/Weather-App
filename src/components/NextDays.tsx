@@ -1,10 +1,4 @@
-import {
-  TempDay,
-  ForecastToday,
-  arrTempDay,
-  IconWeather,
-  weatherMax,
-} from '../types/index'
+import { TempDay, ForecastToday, IconWeather, weatherMax } from '../types/index'
 import { formatDate, average, getIcon } from '../utils/getDate'
 
 interface Prp {
@@ -15,8 +9,8 @@ const NextDays = ({ forecastToday }: Prp): JSX.Element => {
 
   const avgMax: TempDay = {}
   const avgMin: TempDay = {}
-  const dailyIcon: arrTempDay = {}
-  const dailyweather: arrTempDay = {}
+  const dailyIcon: { [key: string]: string[] } = {}
+  const dailyweather: { [key: string]: string[] } = {}
 
   days.forEach((item: ForecastToday): void => {
     const date = new Date(item.dt_txt)
@@ -37,8 +31,8 @@ const NextDays = ({ forecastToday }: Prp): JSX.Element => {
   days.forEach((item: ForecastToday): void => {
     const date = new Date(item.dt_txt)
     const day = date.toISOString().slice(0, 10)
-    const iconAndWeather: IconWeather | never = item.weather[0]
-    console.log(iconAndWeather)
+    const iconAndWeather: IconWeather = item.weather[0]
+
     if (!dailyIcon[day]) {
       dailyIcon[day] = []
     }
@@ -65,8 +59,6 @@ const NextDays = ({ forecastToday }: Prp): JSX.Element => {
   const arraNextForecast = []
   for (const day in nextForecast) {
     if (nextForecast.hasOwnProperty(day)) {
-      console.log('HOK')
-
       arraNextForecast.push({
         day,
         value: nextForecast[day],
